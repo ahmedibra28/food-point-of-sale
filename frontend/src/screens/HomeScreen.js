@@ -7,7 +7,7 @@ import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
 
-import { getProducts } from '../redux/products/productsThunk'
+import { listProducts } from '../redux/products/productsThunk'
 
 const HomeScreen = () => {
   const [page, setPage] = useState(1)
@@ -28,7 +28,7 @@ const HomeScreen = () => {
   } = productList
 
   useEffect(() => {
-    dispatch(getProducts({ page, limit }))
+    dispatch(listProducts({ page, limit }))
 
     // eslint-disable-next-line
   }, [dispatch, page, limit])
@@ -39,7 +39,7 @@ const HomeScreen = () => {
 
   return (
     <div className='row'>
-      <div className='col-md-8 col-12 mt-2'>
+      <div className='col-md-8 col-12 '>
         <div className='product-home p-3 mt-3'>
           <CategoryScreen category={category} setCategory={setCategory} />
 

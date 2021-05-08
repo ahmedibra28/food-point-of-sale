@@ -12,7 +12,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         <div
           className={`card ${
             category !== 'pizza' ? 'bg-transparent' : ''
-          } border-0`}
+          } border-0 rounded-0`}
         >
           <div
             className='bg-light shadow rounded-pill mx-auto text-center'
@@ -22,7 +22,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             <img
               src={pizza}
               alt='pizza'
-              className='img-cart-top'
+              className='img-cart-top img-fluid'
               style={{ width: '4rem' }}
             />
           </div>
@@ -38,7 +38,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         <div
           className={`card ${
             category !== 'snacks' ? 'bg-transparent' : ''
-          } border-0`}
+          } border-0 rounded-0`}
         >
           <div
             className='bg-light shadow rounded-pill mx-auto text-center'
@@ -48,7 +48,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             <img
               src={snack}
               alt='snack'
-              className='img-cart-top'
+              className='img-cart-top img-fluid'
               style={{ width: '4rem' }}
             />
           </div>
@@ -64,7 +64,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         <div
           className={`card ${
             category !== 'lunch' ? 'bg-transparent' : ''
-          } border-0`}
+          } border-0 rounded-0`}
         >
           <div
             className='bg-light shadow rounded-pill mx-auto text-center'
@@ -74,7 +74,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             <img
               src={lunch}
               alt='lunch'
-              className='img-cart-top'
+              className='img-cart-top img-fluid'
               style={{ width: '4rem' }}
             />
           </div>
@@ -90,7 +90,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         <div
           className={`card ${
             category !== 'burger' ? 'bg-transparent' : ''
-          } border-0`}
+          } border-0 rounded-0`}
         >
           <div
             className='bg-light shadow rounded-pill mx-auto text-center'
@@ -100,7 +100,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             <img
               src={burger}
               alt='burger'
-              className='img-cart-top'
+              className='img-cart-top img-fluid'
               style={{ width: '4rem' }}
             />
           </div>
@@ -115,7 +115,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         <div
           className={`card ${
             category !== 'drinks' ? 'bg-transparent' : ''
-          } border-0`}
+          } border-0 rounded-0`}
         >
           <div
             className='bg-light shadow rounded-pill mx-auto text-center'
@@ -125,7 +125,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             <img
               src={drinks}
               alt='drinks'
-              className='img-cart-top'
+              className='img-cart-top img-fluid'
               style={{ width: '4rem' }}
             />
           </div>

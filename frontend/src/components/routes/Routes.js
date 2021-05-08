@@ -12,10 +12,11 @@ import PrivateRoute from './PrivateRoute'
 import UserLogHistoryScreen from '../../screens/LogHistoryScreen'
 import ForgotPasswordScreen from '../../screens/ForgotPasswordScreen'
 import ResetPasswordScreen from '../../screens/ResetPasswordScreen'
+import ProductScreen from '../../screens/ProductScreen'
 
 const Routes = () => {
   return (
-    <section className='mx-auto container'>
+    <section className='mx-auto container mt-2'>
       <Switch>
         <Route exact path='/' component={HomeScreen} />
         <Route path='/forgotpassword' component={ForgotPasswordScreen} />
@@ -27,7 +28,11 @@ const Routes = () => {
           path='/profile'
           component={ProfileScreen}
         />
-
+        <PrivateRoute
+          role={['Admin']}
+          path='/products'
+          component={ProductScreen}
+        />
         <Route
           path='/resetpassword/:resetToken'
           component={ResetPasswordScreen}

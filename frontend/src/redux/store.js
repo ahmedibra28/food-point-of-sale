@@ -12,7 +12,12 @@ import {
   resetPasswordSliceReducer,
 } from './users/usersSlice'
 
-import { listProductSliceReducer } from './products/productsSlice'
+import {
+  listProductSliceReducer,
+  updateProductSliceReducer,
+  deleteProductSliceReducer,
+  createProductSliceReducer,
+} from './products/productsSlice'
 
 export default configureStore({
   reducer: {
@@ -28,5 +33,8 @@ export default configureStore({
     userResetPassword: resetPasswordSliceReducer,
 
     productList: listProductSliceReducer,
+    productUpdate: updateProductSliceReducer,
+    productDelete: deleteProductSliceReducer,
+    productCreate: createProductSliceReducer,
   },
 })

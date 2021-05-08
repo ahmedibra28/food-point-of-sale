@@ -62,8 +62,6 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 export const createProduct = asyncHandler(async (req, res) => {
   const { name, category, price, active } = req.body
 
-  console.log(req.body)
-
   const user = req.user.id
   const image = req.files && req.files.image
 

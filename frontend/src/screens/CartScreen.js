@@ -1,8 +1,8 @@
 import React from 'react'
 import {
   FaDollarSign,
-  FaMoneyBillAlt,
-  FaTimes,
+  // FaMoneyBillAlt,
+  // FaTimes,
   FaTimesCircle,
 } from 'react-icons/fa'
 
@@ -11,44 +11,46 @@ const CartScreen = () => {
     <div className='row cart'>
       <h5 className='text-primary'>Orders #34662</h5>
       <hr />
-      <table className='table'>
-        <thead>
-          <tr>
-            <th scope='col'>Item</th>
-            <th scope='col'>QTY</th>
-            <th scope='col'>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className='text-primary'>
-            <td className='text-primary'>Hot Coppuccino Latto</td>
-            <td>2</td>
-            <td>$4</td>
-          </tr>
-          <tr className='text-primary'>
-            <td className='text-primary'>Crispy Chicken Burger</td>
-            <td>1</td>
-            <td>$6</td>
-          </tr>
-          <tr className='text-primary'>
-            <td className='text-primary'>Mojito</td>
-            <td>7</td>
-            <td>$23</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td>Discount</td>
-            <td>$0</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Sub total</td>
-            <td>$36.00</td>
-          </tr>
-        </tfoot>
-      </table>
+      <div class='table-responsive'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th scope='col'>Item</th>
+              <th scope='col'>QTY</th>
+              <th scope='col'>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className='text-primary'>
+              <td className='text-primary'>Hot Coppuccino Latto</td>
+              <td>2</td>
+              <td>$4</td>
+            </tr>
+            <tr className='text-primary'>
+              <td className='text-primary'>Crispy Chicken Burger</td>
+              <td>1</td>
+              <td>$6</td>
+            </tr>
+            <tr className='text-primary'>
+              <td className='text-primary'>Mojito</td>
+              <td>7</td>
+              <td>$23</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>Discount</td>
+              <td>$0</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Sub total</td>
+              <td>$36.00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
 
       <div className='mb-2'>
         <input
