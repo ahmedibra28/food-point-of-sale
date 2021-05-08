@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
 :root {
-  --primary-color: #845ec2;
-  --secondary-color: #cee7f1;
-  --tertiary-color: #11819f;
+  --primary-color: #c02f73;
+  --secondary-color: #e9e9e9;
+  --tertiary-color: #faa555;
 }
 
 #sidebar {
   height: 100vh;
   transition: 0.7s ease-in-out;
-
+  min-width: 10rem;
   z-index: 1;
 }
 #sidebar.active {
-  margin-left: -6.3rem;
+  margin-left: -10rem;
 }
 
 .wrapper {
@@ -31,7 +31,8 @@ button {
   box-shadow: none !important;
 }
 
-input {
+input,
+select {
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
@@ -40,7 +41,11 @@ input {
 
 .btn-primary,
 .bg-primary {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
+}
+.btn-primary:hover,
+.bg-primary:hover {
+  background-color: var(--tertiary-color) !important;
 }
 a {
   color: var(--primary-color);
@@ -53,12 +58,12 @@ body {
   background-color: var(--secondary-color) !important;
 }
 nav {
-  background-color: var(--tertiary-color) !important;
+  background-color: var(--primary-color) !important;
 }
 .navbar-brand,
 .nav-link,
 .dropdown-item {
-  color: var(--secondary-color) !important;
+  color: var(--tertiary-color) !important;
 }
 
 .dropdown-item:hover {
@@ -66,7 +71,7 @@ nav {
   background-color: var(--secondary-color) !important;
 }
 .dropdown-menu {
-  background-color: transparent;
+  background-color: var(--secondary-color) !important;
 }
 
 label {
@@ -78,4 +83,30 @@ label {
 .toast {
   border-radius: 0 !important;
   border: none;
+}
+
+/* Category */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+.category img {
+  transition: 0.5s ease-out;
+}
+.category img:hover {
+  transform: scale(1.1);
+}
+.product-home {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+.product-list .card {
+  overflow: hidden;
+}
+.product-list img {
+  transition: 0.5s ease-out;
+}
+.product-list img:hover {
+  transform: scale(1.1);
 }
