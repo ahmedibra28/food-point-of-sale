@@ -85,3 +85,24 @@ export const createProduct = createAsyncThunk(
     }
   }
 )
+
+// add to cart
+export const addToCart = createAsyncThunk('addToCart', async (product) => {
+  return product
+})
+
+// remove all from cart
+export const removeAllFromCart = createAsyncThunk(
+  'removeAllFromCart',
+  async () => {
+    return
+  }
+)
+
+// remove one from cart
+export const removeFromCart = createAsyncThunk(
+  'removeFromCart',
+  async (product) => {
+    return product
+  }
+)

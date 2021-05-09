@@ -7,7 +7,12 @@ import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
 
-import { listProducts } from '../redux/products/productsThunk'
+import {
+  listProducts,
+  addToCart,
+  removeAllFromCart,
+  removeFromCart,
+} from '../redux/products/productsThunk'
 
 const HomeScreen = () => {
   const [page, setPage] = useState(1)
@@ -26,6 +31,9 @@ const HomeScreen = () => {
     total,
     pages,
   } = productList
+
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
 
   useEffect(() => {
     dispatch(listProducts({ page, limit }))
@@ -70,6 +78,10 @@ const HomeScreen = () => {
               products={products}
               addDecimal={addDecimal}
               category={category}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              dispatch={dispatch}
+              cartItems={cartItems}
             />
           )}
         </div>
@@ -77,7 +89,12 @@ const HomeScreen = () => {
       <div className='col-md-4 col-12 mt-2 '>
         {' '}
         <div className='product-home p-3 mt-3'>
-          <CartScreen />
+          <CartScreen
+            cartItems={cartItems}
+            addDecimal={addDecimal}
+            removeAllFromCart={removeAllFromCart}
+            dispatch={dispatch}
+          />
         </div>
       </div>
     </div>

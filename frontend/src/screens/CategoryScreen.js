@@ -8,7 +8,7 @@ import snack from '../images/snack.png'
 const CategoryScreen = ({ setCategory, category }) => {
   return (
     <div className='row category'>
-      <div className='col-md-2 col-6 mx-auto'>
+      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
         <div
           className={`card ${
             category !== 'pizza' ? 'bg-transparent' : ''
@@ -27,14 +27,14 @@ const CategoryScreen = ({ setCategory, category }) => {
             />
           </div>
           <div className='card-body'>
-            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary'>
+            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary d-none d-sm-block'>
               Pizza
             </div>
           </div>
         </div>
       </div>
 
-      <div className='col-md-2 col-6 mx-auto'>
+      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
         <div
           className={`card ${
             category !== 'snacks' ? 'bg-transparent' : ''
@@ -53,14 +53,14 @@ const CategoryScreen = ({ setCategory, category }) => {
             />
           </div>
           <div className='card-body'>
-            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary'>
+            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary d-none d-sm-block'>
               Snacks
             </div>
           </div>
         </div>
       </div>
 
-      <div className='col-md-2 col-6 mx-auto'>
+      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
         <div
           className={`card ${
             category !== 'lunch' ? 'bg-transparent' : ''
@@ -79,14 +79,14 @@ const CategoryScreen = ({ setCategory, category }) => {
             />
           </div>
           <div className='card-body'>
-            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary'>
+            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary d-none d-sm-block'>
               Lunch
             </div>
           </div>
         </div>
       </div>
 
-      <div className='col-md-2 col-6 mx-auto'>
+      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
         <div
           className={`card ${
             category !== 'burger' ? 'bg-transparent' : ''
@@ -105,13 +105,13 @@ const CategoryScreen = ({ setCategory, category }) => {
             />
           </div>
           <div className='card-body'>
-            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary'>
+            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary d-none d-sm-block'>
               Burger
             </div>
           </div>
         </div>
       </div>
-      <div className='col-md-2 col-6 mx-auto'>
+      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
         <div
           className={`card ${
             category !== 'drinks' ? 'bg-transparent' : ''
@@ -130,7 +130,7 @@ const CategoryScreen = ({ setCategory, category }) => {
             />
           </div>
           <div className='card-body'>
-            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary'>
+            <div className='card-title text-center fw-bold fs-6 text-uppercase text-primary d-none d-sm-block'>
               Drinks
             </div>
           </div>

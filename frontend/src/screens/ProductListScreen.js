@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { FaCartPlus, FaTrash } from 'react-icons/fa'
 import Pagination from '../components/Pagination'
 
@@ -12,16 +11,19 @@ const ProductListScreen = ({
   products,
   addDecimal,
   category,
+  addToCart,
+  dispatch,
+  removeFromCart,
+  cartItems,
 }) => {
-  const [qty, setQty] = useState(1)
-
   return (
     <>
       {products && products.length > 0 ? (
         <div className='row gy-4 product-list'>
           {products.map(
             (product) =>
-              product.category.toLowerCase() === category && (
+              product.category.toLowerCase() === category &&
+              product.active && (
                 <div key={product._id} className='col-lg-3 col-md-6 col-12'>
                   <div className='card'>
                     <img src={product.image.imagePath} alt='product' />
@@ -31,14 +33,23 @@ const ProductListScreen = ({
                         <span className='price text-primary fw-bold'>
                           ${addDecimal(product.price)}
                         </span>
-                        <span className='price'>
-                          <FaTrash
-                            className='text-light bg-danger p-2 fs-3 rounded-pill mb-1'
-                            onClick={() => setQty(qty - 1)}
-                          />{' '}
+                        <span>
+                          {cartItems &&
+                            cartItems.map(
+                              (item) =>
+                                item._id === product._id && (
+                                  <FaTrash
+                                    key={item._id}
+                                    onClick={() =>
+                                      dispatch(removeFromCart(product))
+                                    }
+                                    className='text-light bg-danger p-2 fs-3 rounded-pill mb-1'
+                                  />
+                                )
+                            )}{' '}
                           <FaCartPlus
                             className='text-light bg-primary p-2 fs-3 rounded-pill mb-1'
-                            onClick={() => setQty(qty + 1)}
+                            onClick={() => dispatch(addToCart(product))}
                           />
                         </span>
                       </div>

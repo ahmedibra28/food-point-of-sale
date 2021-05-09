@@ -3,6 +3,9 @@ import {
   updateProduct,
   deleteProduct,
   createProduct,
+  addToCart,
+  removeAllFromCart,
+  removeFromCart,
 } from './productsThunk'
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -112,10 +115,58 @@ const updateProductSlice = createSlice({
   },
 })
 
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : []
+
+// add product to cart / local storage
+const cartSlice = createSlice({
+  name: 'cartItems',
+  initialState: { cartItems: cartItemsFromStorage },
+  extraReducers: {
+    [addToCart.fulfilled]: (state, { payload }) => {
+      const existItems = state.cartItems.find((x) => x._id === payload._id)
+
+      if (existItems) {
+        const noDuplicate = state.cartItems.filter(
+          (old) => old._id !== payload._id
+        )
+        const { category, image, name, price, qty, _id } = existItems
+        const newQtyUpdate = {
+          category,
+          image,
+          name,
+          price,
+          qty: qty + 1,
+          _id,
+        }
+        state.cartItems = [...noDuplicate, newQtyUpdate]
+        localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      } else {
+        const { category, image, name, price, _id } = payload
+        state.cartItems = [
+          ...state.cartItems,
+          { category, image, name, price, qty: 1, _id },
+        ]
+        localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      }
+    },
+    [removeAllFromCart.fulfilled]: (state) => {
+      state.cartItems = []
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+    },
+    [removeFromCart.fulfilled]: (state, { payload }) => {
+      state.cartItems = state.cartItems.filter((x) => x._id !== payload._id)
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+    },
+  },
+})
+
 export const listProductSliceReducer = listProductSlice.reducer
 export const createProductSliceReducer = createProductSlice.reducer
 export const deleteProductSliceReducer = deleteProductSlice.reducer
 export const updateProductSliceReducer = updateProductSlice.reducer
+export const cartSliceReducer = cartSlice.reducer
 
 export const { resetListProducts } = listProductSlice.actions
 export const { resetCreateProduct } = createProductSlice.actions

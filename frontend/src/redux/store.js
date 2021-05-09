@@ -17,6 +17,7 @@ import {
   updateProductSliceReducer,
   deleteProductSliceReducer,
   createProductSliceReducer,
+  cartSliceReducer,
 } from './products/productsSlice'
 
 export default configureStore({
@@ -36,5 +37,7 @@ export default configureStore({
     productUpdate: updateProductSliceReducer,
     productDelete: deleteProductSliceReducer,
     productCreate: createProductSliceReducer,
+
+    cart: cartSliceReducer,
   },
 })
