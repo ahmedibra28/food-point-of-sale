@@ -37,9 +37,9 @@ const ProductListScreen = ({
                           {cartItems &&
                             cartItems.map(
                               (item) =>
-                                item._id === product._id && (
+                                item.product === product._id && (
                                   <FaTrash
-                                    key={item._id}
+                                    key={item.product}
                                     onClick={() =>
                                       dispatch(removeFromCart(product))
                                     }

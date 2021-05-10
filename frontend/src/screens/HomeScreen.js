@@ -6,6 +6,7 @@ import { FaSearch } from 'react-icons/fa'
 import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
+import { useForm } from 'react-hook-form'
 
 import {
   listProducts,
@@ -13,8 +14,16 @@ import {
   removeAllFromCart,
   removeFromCart,
 } from '../redux/products/productsThunk'
+import { resetCart } from '../redux/products/productsSlice'
 
 const HomeScreen = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(30)
   const [category, setCategory] = useState('lunch')
@@ -33,7 +42,12 @@ const HomeScreen = () => {
   } = productList
 
   const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const {
+    cartItems,
+    successAddToCart,
+    successRemoveAllFromCart,
+    successRemoveFromCart,
+  } = cart
 
   useEffect(() => {
     dispatch(listProducts({ page, limit }))
@@ -44,6 +58,31 @@ const HomeScreen = () => {
   const addDecimal = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
+
+  const totalPrice =
+    cartItems &&
+    cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)
+
+  const submitHandler = (data) => {
+    // dispatch(updateUserProfile(data))
+    console.log({
+      order: { orderType: data.orderType, mobile: data.mobile, totalPrice },
+      orderItems: cartItems,
+    })
+  }
+
+  useEffect(() => {
+    if (successAddToCart || successRemoveAllFromCart || successRemoveFromCart) {
+      setTimeout(() => {
+        dispatch(resetCart())
+      }, 5000)
+    }
+  }, [
+    successAddToCart,
+    successRemoveAllFromCart,
+    successRemoveFromCart,
+    dispatch,
+  ])
 
   return (
     <div className='row'>
@@ -86,14 +125,33 @@ const HomeScreen = () => {
           )}
         </div>
       </div>
-      <div className='col-md-4 col-12 mt-2 '>
+      <div className='col-md-4 col-12'>
         {' '}
         <div className='product-home p-3 mt-3'>
+          {successAddToCart && (
+            <Message variant='success'>Item has added to the order</Message>
+          )}
+          {successRemoveAllFromCart && (
+            <Message variant='success'>
+              Items has been removed from the order
+            </Message>
+          )}
+          {successRemoveFromCart && (
+            <Message variant='success'>
+              Item has been removed from the order
+            </Message>
+          )}
+
           <CartScreen
+            submitHandler={submitHandler}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            register={register}
             cartItems={cartItems}
             addDecimal={addDecimal}
             removeAllFromCart={removeAllFromCart}
             dispatch={dispatch}
+            watch={watch}
           />
         </div>
       </div>

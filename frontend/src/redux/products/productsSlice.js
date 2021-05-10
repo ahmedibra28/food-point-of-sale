@@ -123,40 +123,51 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 const cartSlice = createSlice({
   name: 'cartItems',
   initialState: { cartItems: cartItemsFromStorage },
+  reducers: {
+    resetCart: (state) => {
+      state.successAddToCart = false
+      state.successRemoveAllFromCart = false
+      state.successRemoveFromCart = false
+    },
+  },
   extraReducers: {
     [addToCart.fulfilled]: (state, { payload }) => {
-      const existItems = state.cartItems.find((x) => x._id === payload._id)
+      const existItems = state.cartItems.find((x) => x.product === payload._id)
 
       if (existItems) {
         const noDuplicate = state.cartItems.filter(
-          (old) => old._id !== payload._id
+          (old) => old.product !== payload._id
         )
-        const { category, image, name, price, qty, _id } = existItems
+        const { category, image, name, price, qty, product } = existItems
         const newQtyUpdate = {
           category,
           image,
           name,
           price,
           qty: qty + 1,
-          _id,
+          product,
         }
         state.cartItems = [...noDuplicate, newQtyUpdate]
+        state.successAddToCart = true
         localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
       } else {
         const { category, image, name, price, _id } = payload
         state.cartItems = [
           ...state.cartItems,
-          { category, image, name, price, qty: 1, _id },
+          { category, image, name, price, qty: 1, product: _id },
         ]
+        state.successAddToCart = true
         localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
       }
     },
     [removeAllFromCart.fulfilled]: (state) => {
       state.cartItems = []
+      state.successRemoveAllFromCart = true
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     [removeFromCart.fulfilled]: (state, { payload }) => {
-      state.cartItems = state.cartItems.filter((x) => x._id !== payload._id)
+      state.cartItems = state.cartItems.filter((x) => x.product !== payload._id)
+      state.successRemoveFromCart = true
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
   },
@@ -172,3 +183,4 @@ export const { resetListProducts } = listProductSlice.actions
 export const { resetCreateProduct } = createProductSlice.actions
 export const { resetDeleteProduct } = deleteProductSlice.actions
 export const { resetUpdateProduct } = updateProductSlice.actions
+export const { resetCart } = cartSlice.actions

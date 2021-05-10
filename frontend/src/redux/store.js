@@ -20,6 +20,12 @@ import {
   cartSliceReducer,
 } from './products/productsSlice'
 
+import {
+  listOrderSliceReducer,
+  deleteOrderSliceReducer,
+  createOrderSliceReducer,
+} from './orders/ordersSlice'
+
 export default configureStore({
   reducer: {
     userLogin: userLoginSliceReducer,
@@ -39,5 +45,9 @@ export default configureStore({
     productCreate: createProductSliceReducer,
 
     cart: cartSliceReducer,
+
+    orderList: listOrderSliceReducer,
+    orderDelete: deleteOrderSliceReducer,
+    orderCreate: createOrderSliceReducer,
   },
 })

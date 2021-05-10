@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Routes from './components/routes/Routes'
 import { useDispatch, useSelector } from 'react-redux'
 import 'animate.css'
-import { FaPowerOff, FaSlidersH } from 'react-icons/fa'
+import { FaPowerOff, FaShoppingCart, FaSlidersH } from 'react-icons/fa'
 import { resetUpdateUser, logout } from './redux/users/usersSlice'
 
 import HeaderGuest from './components/HeaderGuest'
@@ -15,6 +15,11 @@ const App = () => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+
+  const qty = cartItems && cartItems.reduce((acc, item) => acc + item.qty, 0)
 
   useEffect(() => {
     // log user out from all tabs if they log out in one tab
@@ -60,6 +65,12 @@ const App = () => {
                 </button>
 
                 <ul className='navbar-nav d-flex flex-row'>
+                  <li className='nav-item'>
+                    <Link to='/' className='nav-link'>
+                      <FaShoppingCart className='mb-1' />{' '}
+                      <sup>{cartItems && qty}</sup>
+                    </Link>
+                  </li>
                   <li className='nav-item'>
                     <Link to='/' onClick={logoutHandler} className='nav-link'>
                       <FaPowerOff className='mb-1' /> Logout
