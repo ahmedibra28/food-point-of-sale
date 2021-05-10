@@ -7,6 +7,7 @@ import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
 import { useForm } from 'react-hook-form'
+import { io } from 'socket.io-client'
 
 import {
   listProducts,
@@ -17,6 +18,14 @@ import {
 import { resetCart } from '../redux/products/productsSlice'
 
 const HomeScreen = () => {
+  const socket = io('http://localhost:4000/')
+
+  useEffect(() => {
+    socket.on('successConnection', (data) => {
+      console.log(data)
+    })
+  }, [])
+
   const {
     register,
     handleSubmit,
