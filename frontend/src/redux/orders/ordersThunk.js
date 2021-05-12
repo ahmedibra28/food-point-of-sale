@@ -52,15 +52,12 @@ export const deleteOrder = createAsyncThunk(
 )
 
 // add new order
-export const createOrder = createAsyncThunk(
-  'createOrder',
-  async (order, { getState }) => {
-    const config = configHeader(getState)
-    try {
-      const { data } = await axios.post(`/api/orders`, order, config)
-      return data
-    } catch (error) {
-      throw error.response.data
-    }
+export const createOrder = createAsyncThunk('createOrder', async (order) => {
+  const config = configHeaderNormal()
+  try {
+    const { data } = await axios.post(`/api/orders`, order, config)
+    return data
+  } catch (error) {
+    throw error.response.data
   }
-)
+})

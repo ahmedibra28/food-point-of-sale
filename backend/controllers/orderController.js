@@ -2,7 +2,10 @@ import asyncHandler from 'express-async-handler'
 import OrderModel from '../models/orderModel.js'
 
 export const addOrderItems = asyncHandler(async (req, res) => {
-  const { orderItems, totalPrice } = req.body
+  const {
+    orderItems,
+    order: { orderType, mobile, totalPrice },
+  } = req.body
 
   if (orderItems && orderItems.length === 0) {
     res.status(400)
@@ -11,6 +14,8 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     const order = new OrderModel({
       orderItems,
       totalPrice,
+      mobile,
+      orderType,
     })
 
     const createdOrder = await order.save()

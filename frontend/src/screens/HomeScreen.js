@@ -16,7 +16,8 @@ import {
   removeFromCart,
 } from '../redux/products/productsThunk'
 import { resetCart } from '../redux/products/productsSlice'
-
+import { resetCreateOrder } from '../redux/orders/ordersSlice'
+import { createOrder } from '../redux/orders/ordersThunk'
 const HomeScreen = () => {
   const socket = io('http://localhost:4000/')
 
@@ -58,6 +59,9 @@ const HomeScreen = () => {
     successRemoveFromCart,
   } = cart
 
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { loadingCreateOrder, successCreateOrder } = orderCreate
+
   useEffect(() => {
     dispatch(listProducts({ page, limit }))
 
@@ -73,11 +77,12 @@ const HomeScreen = () => {
     cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)
 
   const submitHandler = (data) => {
-    // dispatch(updateUserProfile(data))
-    console.log({
-      order: { orderType: data.orderType, mobile: data.mobile, totalPrice },
-      orderItems: cartItems,
-    })
+    dispatch(
+      createOrder({
+        order: { orderType: data.orderType, mobile: data.mobile, totalPrice },
+        orderItems: cartItems,
+      })
+    )
   }
 
   useEffect(() => {
@@ -161,6 +166,7 @@ const HomeScreen = () => {
             removeAllFromCart={removeAllFromCart}
             dispatch={dispatch}
             watch={watch}
+            loadingCreateOrder={loadingCreateOrder}
           />
         </div>
       </div>

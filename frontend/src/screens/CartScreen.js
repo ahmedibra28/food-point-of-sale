@@ -3,6 +3,7 @@ import plate from '../images/plate.png'
 import burger from '../images/burger.png'
 import moment from 'moment'
 import { useReactToPrint } from 'react-to-print'
+import Loader from '../components/Loader'
 
 import {
   FaDollarSign,
@@ -20,6 +21,7 @@ const CartScreen = ({
   handleSubmit,
   errors,
   register,
+  loadingCreateOrder,
 }) => {
   const componentRef = useRef()
   const handlePrint = useReactToPrint({
@@ -182,8 +184,19 @@ const CartScreen = ({
               >
                 <FaTimesCircle className='mb-1' /> Clear All
               </button>
-              <button className='btn btn-primary btn-sm mx-1'>
-                <FaDollarSign className='mb-1' /> Checkout
+
+              <button
+                type='submit'
+                className='btn btn-primary btn-sm mx-1'
+                disabled={loadingCreateOrder && true}
+              >
+                {loadingCreateOrder ? (
+                  <span className='spinner-border spinner-border-sm' />
+                ) : (
+                  <>
+                    <FaDollarSign className='mb-1' /> 'Checkout'{' '}
+                  </>
+                )}
               </button>
             </div>
             <button
