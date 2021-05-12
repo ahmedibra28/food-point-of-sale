@@ -19,6 +19,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     })
 
     const createdOrder = await order.save()
+    io.emit('addOrderItems', { success: true })
     res.status(201).json(createdOrder)
   }
 })

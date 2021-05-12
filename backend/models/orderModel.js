@@ -15,6 +15,11 @@ const orderScheme = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    status: {
+      type: String,
+      required: true,
+      default: 'unpaid',
+    },
     orderItems: [
       {
         product: {

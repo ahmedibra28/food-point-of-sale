@@ -13,6 +13,7 @@ import UserLogHistoryScreen from '../../screens/LogHistoryScreen'
 import ForgotPasswordScreen from '../../screens/ForgotPasswordScreen'
 import ResetPasswordScreen from '../../screens/ResetPasswordScreen'
 import ProductScreen from '../../screens/ProductScreen'
+import OrderScreen from '../../screens/OrderScreen'
 
 const Routes = () => {
   return (
@@ -33,6 +34,7 @@ const Routes = () => {
           path='/products'
           component={ProductScreen}
         />
+        <PrivateRoute role={['Admin']} path='/orders' component={OrderScreen} />
         <Route
           path='/resetpassword/:resetToken'
           component={ResetPasswordScreen}

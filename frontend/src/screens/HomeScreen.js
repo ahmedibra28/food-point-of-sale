@@ -7,7 +7,6 @@ import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
 import { useForm } from 'react-hook-form'
-import { io } from 'socket.io-client'
 
 import {
   listProducts,
@@ -19,14 +18,6 @@ import { resetCart } from '../redux/products/productsSlice'
 import { resetCreateOrder } from '../redux/orders/ordersSlice'
 import { createOrder } from '../redux/orders/ordersThunk'
 const HomeScreen = () => {
-  const socket = io('http://localhost:4000/')
-
-  useEffect(() => {
-    socket.on('successConnection', (data) => {
-      console.log(data)
-    })
-  }, [])
-
   const {
     register,
     handleSubmit,
@@ -43,13 +34,8 @@ const HomeScreen = () => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const {
-    products,
-    loadingListProducts,
-    errorListProducts,
-    total,
-    pages,
-  } = productList
+  const { products, loadingListProducts, errorListProducts, total, pages } =
+    productList
 
   const cart = useSelector((state) => state.cart)
   const {
@@ -61,6 +47,14 @@ const HomeScreen = () => {
 
   const orderCreate = useSelector((state) => state.orderCreate)
   const { loadingCreateOrder, successCreateOrder } = orderCreate
+
+  useEffect(() => {
+    if (successCreateOrder) {
+      setTimeout(() => {
+        dispatch(resetCreateOrder())
+      }, 5000)
+    }
+  }, [successCreateOrder, dispatch])
 
   useEffect(() => {
     dispatch(listProducts({ page, limit }))
@@ -153,6 +147,11 @@ const HomeScreen = () => {
           {successRemoveFromCart && (
             <Message variant='success'>
               Item has been removed from the order
+            </Message>
+          )}
+          {successCreateOrder && (
+            <Message variant='success'>
+              Order has been sent successfully
             </Message>
           )}
 

@@ -52,30 +52,19 @@ const ProductScreen = () => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const {
-    products,
-    loadingListProducts,
-    errorListProducts,
-    total,
-    pages,
-  } = productList
+  const { products, loadingListProducts, errorListProducts, total, pages } =
+    productList
 
   const productUpdate = useSelector((state) => state.productUpdate)
-  const {
-    loadingUpdateProduct,
-    errorUpdateProduct,
-    successUpdateProduct,
-  } = productUpdate
+  const { loadingUpdateProduct, errorUpdateProduct, successUpdateProduct } =
+    productUpdate
 
   const productDelete = useSelector((state) => state.productDelete)
   const { successDeleteProduct, errorDeleteProduct } = productDelete
 
   const productCreate = useSelector((state) => state.productCreate)
-  const {
-    loadingCreateProduct,
-    errorCreateProduct,
-    successCreateProduct,
-  } = productCreate
+  const { loadingCreateProduct, errorCreateProduct, successCreateProduct } =
+    productCreate
 
   const formCleanHandler = () => {
     setEdit(false)

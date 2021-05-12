@@ -5,6 +5,7 @@ import {
   FaCog,
   FaFileContract,
   FaShoppingBasket,
+  FaTruckLoading,
   FaUser,
   FaUserCircle,
   FaUsers,
@@ -48,6 +49,11 @@ const HeaderAuthorized = () => {
               <li className='nav-item'>
                 <Link to='/products' className='nav-link'>
                   <FaUtensils className='mb-1' /> Products
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='/orders' className='nav-link'>
+                  <FaTruckLoading className='mb-1' /> Orders
                 </Link>
               </li>
               <li className='nav-item'>

@@ -24,18 +24,21 @@ const configHeaderNormal = () => {
 }
 
 // get all orders
-export const listOrders = createAsyncThunk('listOrders', async (options) => {
-  const config = configHeaderNormal()
-  try {
-    const { data } = await axios.get(
-      `/api/orders?page=${options.page}&&limit=${options.limit}`,
-      config
-    )
-    return data
-  } catch (error) {
-    throw error.response.data
+export const listOrders = createAsyncThunk(
+  'listOrders',
+  async (options, { getState }) => {
+    const config = configHeader(getState)
+    try {
+      const { data } = await axios.get(
+        `/api/orders?page=${options.page}&&limit=${options.limit}`,
+        config
+      )
+      return data
+    } catch (error) {
+      throw error.response.data
+    }
   }
-})
+)
 
 // delete order
 export const deleteOrder = createAsyncThunk(

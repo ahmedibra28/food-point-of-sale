@@ -3,7 +3,6 @@ import plate from '../images/plate.png'
 import burger from '../images/burger.png'
 import moment from 'moment'
 import { useReactToPrint } from 'react-to-print'
-import Loader from '../components/Loader'
 
 import {
   FaDollarSign,
@@ -194,7 +193,7 @@ const CartScreen = ({
                   <span className='spinner-border spinner-border-sm' />
                 ) : (
                   <>
-                    <FaDollarSign className='mb-1' /> 'Checkout'{' '}
+                    <FaDollarSign className='mb-1' /> Checkout{' '}
                   </>
                 )}
               </button>
