@@ -36,7 +36,6 @@ global.io = io
 
 io.on('connection', (socket) => {
   console.log('a user connected')
-  socket.emit('successConnection', 'Server & Client are connected successfully')
 
   socket.on('disconnect', () => {
     console.log('user disconnected')

@@ -16,7 +16,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 
   query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 })
 
-  if (page > pages) {
+  if (page > pages && total > 0) {
     res.status(404)
     throw new Error('Page not found')
   }
