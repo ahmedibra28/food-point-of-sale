@@ -3,13 +3,14 @@ import { io } from 'socket.io-client'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { FaTrash } from 'react-icons/fa'
+import { FaCheckCircle, FaInfoCircle, FaTimes, FaTrash } from 'react-icons/fa'
 import { resetDeleteOrder, resetListOrders } from '../redux/orders/ordersSlice'
 import { deleteOrder, listOrders } from '../redux/orders/ordersThunk'
 import { confirmAlert } from 'react-confirm-alert'
 import { Confirm } from '../components/Confirm'
 import Pagination from '../components/Pagination'
 import moment from 'moment'
+import OrderDetailScreen from './OrderDetailScreen'
 
 const OrderScreen = () => {
   const socket = io('http://localhost:4000/')
@@ -22,7 +23,8 @@ const OrderScreen = () => {
 
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(30)
-  const [socketSuccess, setSocketSuccess] = useState(30)
+  const [socketSuccess, setSocketSuccess] = useState(false)
+  const [orderDetail, setOrderDetail] = useState({})
 
   const orderList = useSelector((state) => state.orderList)
   const { orders, loadingListOrders, errorListOrders, total, pages } = orderList
@@ -39,13 +41,10 @@ const OrderScreen = () => {
     }
   }, [errorDeleteOrder, successDeleteOrder, dispatch])
 
-  useState(() => {
-    socket.open()
-    socket.on('addOrderItems', (data) => {
-      setSocketSuccess(data.success)
-    })
+  useEffect(() => {
+    socket.on('addOrderItems', (data) => setSocketSuccess(data.success))
     return () => {
-      socket.close()
+      socket.off()
     }
   }, [socket])
 
@@ -110,22 +109,21 @@ const OrderScreen = () => {
                       <td>${addDecimal(order.totalPrice)}</td>
                       <td>
                         {order.status === 'unpaid' && (
-                          <button className='btn btn-danger btn-sm rounded-0'>
-                            un-paid
-                          </button>
+                          <FaTimes className='mb-1 text-danger' />
                         )}
                         {order.status === 'paid' && (
-                          <button className='btn btn-warning btn-sm rounded-0'>
-                            paid
-                          </button>
-                        )}
-                        {order.status === 'delivered' && (
-                          <button className='btn btn-success btn-sm rounded-0'>
-                            delivered
-                          </button>
+                          <FaCheckCircle className='mb-1 text-success' />
                         )}
                       </td>
                       <td className='btn-group'>
+                        <button
+                          data-bs-toggle='modal'
+                          data-bs-target='#orderDetailModal'
+                          onClick={() => setOrderDetail(order)}
+                          className='btn btn-success btn-sm mx-1'
+                        >
+                          <FaInfoCircle className='mb-1' /> Detail
+                        </button>
                         <button
                           className='btn btn-danger btn-sm'
                           onClick={() => deleteHandler(order._id)}
@@ -138,6 +136,39 @@ const OrderScreen = () => {
               </tbody>
             </table>
           </div>
+          <div
+            className='modal fade'
+            id='orderDetailModal'
+            data-bs-backdrop='static'
+            data-bs-keyboard='false'
+            tabIndex='-1'
+            aria-labelledby='orderDetailModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content modal-background'>
+                <div className='modal-header'>
+                  <h3 className='modal-title ' id='orderDetailModalLabel'>
+                    Order Details
+                  </h3>
+
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <OrderDetailScreen
+                    orderDetail={orderDetail && orderDetail}
+                    addDecimal={addDecimal}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className='d-flex justify-content-center'>
             <Pagination
               setPage={setPage}

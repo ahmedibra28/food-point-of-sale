@@ -110,3 +110,7 @@ label {
 .product-list img:hover {
   transform: scale(1.1);
 }
+.pagination-selector {
+  padding: 0.43rem 0rem !important;
+  margin-top: 0.06rem !important;
+}
