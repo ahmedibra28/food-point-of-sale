@@ -1,4 +1,9 @@
-import { listOrders, deleteOrder, createOrder } from './ordersThunk'
+import {
+  listOrders,
+  deleteOrder,
+  createOrder,
+  updateOrder,
+} from './ordersThunk'
 import { createSlice } from '@reduxjs/toolkit'
 
 // get all orders
@@ -80,10 +85,37 @@ const deleteOrderSlice = createSlice({
   },
 })
 
+// update order to paid
+const updateOrderSlice = createSlice({
+  name: 'updateOrder',
+  initialState: {},
+  reducers: {
+    resetUpdateOrder: (state) => {
+      state.successUpdateOrder = false
+      state.errorUpdateOrder = null
+    },
+  },
+  extraReducers: {
+    [updateOrder.pending]: (state) => {
+      state.loadingUpdateOrder = true
+    },
+    [updateOrder.fulfilled]: (state) => {
+      state.loadingUpdateOrder = false
+      state.successUpdateOrder = true
+    },
+    [updateOrder.rejected]: (state, { error }) => {
+      state.loadingUpdateOrder = false
+      state.errorUpdateOrder = error.message
+    },
+  },
+})
+
 export const listOrderSliceReducer = listOrderSlice.reducer
 export const createOrderSliceReducer = createOrderSlice.reducer
+export const updateOrderSliceReducer = updateOrderSlice.reducer
 export const deleteOrderSliceReducer = deleteOrderSlice.reducer
 
 export const { resetListOrders } = listOrderSlice.actions
 export const { resetCreateOrder } = createOrderSlice.actions
+export const { resetUpdateOrder } = updateOrderSlice.actions
 export const { resetDeleteOrder } = deleteOrderSlice.actions

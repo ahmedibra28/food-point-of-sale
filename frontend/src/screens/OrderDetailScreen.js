@@ -3,7 +3,7 @@ import { FaCheckCircle, FaPrint } from 'react-icons/fa'
 import { useReactToPrint } from 'react-to-print'
 import burger from '../images/burger.png'
 import moment from 'moment'
-const OrderDetailScreen = ({ orderDetail, addDecimal }) => {
+const OrderDetailScreen = ({ orderDetail, addDecimal, updateToPayHandler }) => {
   const componentRef = useRef()
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -88,7 +88,7 @@ const OrderDetailScreen = ({ orderDetail, addDecimal }) => {
       <div className='btn-group'>
         <button
           type='button'
-          onClick={handlePrint}
+          onClick={() => updateToPayHandler(orderDetail && orderDetail._id)}
           className='btn btn-success btn-sm mx-1 float-end d-block'
         >
           <FaCheckCircle className='mb-1' /> Confirm

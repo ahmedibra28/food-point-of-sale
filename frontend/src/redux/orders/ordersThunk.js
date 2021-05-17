@@ -64,3 +64,17 @@ export const createOrder = createAsyncThunk('createOrder', async (order) => {
     throw error.response.data
   }
 })
+
+// update order to paid
+export const updateOrder = createAsyncThunk(
+  'updateOrder',
+  async (id, { getState }) => {
+    const config = configHeader(getState)
+    try {
+      const { data } = await axios.put(`/api/orders/${id}`, config)
+      return data
+    } catch (error) {
+      throw error.response.data
+    }
+  }
+)

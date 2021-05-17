@@ -24,6 +24,7 @@ import {
   listOrderSliceReducer,
   deleteOrderSliceReducer,
   createOrderSliceReducer,
+  updateOrderSliceReducer,
 } from './orders/ordersSlice'
 
 export default configureStore({
@@ -49,5 +50,6 @@ export default configureStore({
     orderList: listOrderSliceReducer,
     orderDelete: deleteOrderSliceReducer,
     orderCreate: createOrderSliceReducer,
+    orderUpdate: updateOrderSliceReducer,
   },
 })

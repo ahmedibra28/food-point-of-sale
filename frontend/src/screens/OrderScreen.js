@@ -4,8 +4,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { FaCheckCircle, FaInfoCircle, FaTimes, FaTrash } from 'react-icons/fa'
-import { resetDeleteOrder, resetListOrders } from '../redux/orders/ordersSlice'
-import { deleteOrder, listOrders } from '../redux/orders/ordersThunk'
+import {
+  resetDeleteOrder,
+  resetListOrders,
+  resetUpdateOrder,
+} from '../redux/orders/ordersSlice'
+import {
+  deleteOrder,
+  listOrders,
+  updateOrder,
+} from '../redux/orders/ordersThunk'
 import { confirmAlert } from 'react-confirm-alert'
 import { Confirm } from '../components/Confirm'
 import Pagination from '../components/Pagination'
@@ -32,14 +40,29 @@ const OrderScreen = () => {
   const orderDelete = useSelector((state) => state.orderDelete)
   const { successDeleteOrder, errorDeleteOrder } = orderDelete
 
+  const orderUpdate = useSelector((state) => state.orderUpdate)
+  const { successUpdateOrder, errorUpdateOrder } = orderUpdate
+
   useEffect(() => {
-    if (errorDeleteOrder || successDeleteOrder) {
+    if (
+      errorDeleteOrder ||
+      successDeleteOrder ||
+      successUpdateOrder ||
+      errorUpdateOrder
+    ) {
       setTimeout(() => {
         dispatch(resetDeleteOrder())
         dispatch(resetListOrders())
+        dispatch(resetUpdateOrder())
       }, 5000)
     }
-  }, [errorDeleteOrder, successDeleteOrder, dispatch])
+  }, [
+    errorDeleteOrder,
+    successDeleteOrder,
+    successUpdateOrder,
+    errorUpdateOrder,
+    dispatch,
+  ])
 
   useEffect(() => {
     socket.on('addOrderItems', (data) => setSocketSuccess(data.success))
@@ -52,7 +75,18 @@ const OrderScreen = () => {
     socketSuccess && setSocketSuccess(false)
 
     dispatch(listOrders({ page, limit }))
-  }, [dispatch, successDeleteOrder, page, limit, socketSuccess])
+  }, [
+    dispatch,
+    successDeleteOrder,
+    successUpdateOrder,
+    page,
+    limit,
+    socketSuccess,
+  ])
+
+  const updateToPayHandler = (id) => {
+    dispatch(updateOrder(id))
+  }
 
   const deleteHandler = (id) => {
     confirmAlert(Confirm(() => dispatch(deleteOrder(id))))
@@ -60,9 +94,16 @@ const OrderScreen = () => {
 
   return (
     <div>
+      {successUpdateOrder && (
+        <Message variant='success'>Payment success.</Message>
+      )}
+      {errorUpdateOrder && (
+        <Message variant='danger'>{errorUpdateOrder}</Message>
+      )}
+
       {successDeleteOrder && (
         <Message variant='success'>
-          Product has been deleted successfully.
+          Order has been deleted successfully.
         </Message>
       )}
       {errorDeleteOrder && (
@@ -136,38 +177,6 @@ const OrderScreen = () => {
               </tbody>
             </table>
           </div>
-          <div
-            className='modal fade'
-            id='orderDetailModal'
-            data-bs-backdrop='static'
-            data-bs-keyboard='false'
-            tabIndex='-1'
-            aria-labelledby='orderDetailModalLabel'
-            aria-hidden='true'
-          >
-            <div className='modal-dialog'>
-              <div className='modal-content modal-background'>
-                <div className='modal-header'>
-                  <h3 className='modal-title ' id='orderDetailModalLabel'>
-                    Order Details
-                  </h3>
-
-                  <button
-                    type='button'
-                    className='btn-close'
-                    data-bs-dismiss='modal'
-                    aria-label='Close'
-                  ></button>
-                </div>
-                <div className='modal-body'>
-                  <OrderDetailScreen
-                    orderDetail={orderDetail && orderDetail}
-                    addDecimal={addDecimal}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div className='d-flex justify-content-center'>
             <Pagination
@@ -181,6 +190,40 @@ const OrderScreen = () => {
           </div>
         </>
       )}
+
+      <div
+        className='modal fade'
+        id='orderDetailModal'
+        data-bs-backdrop='static'
+        data-bs-keyboard='false'
+        tabIndex='-1'
+        aria-labelledby='orderDetailModalLabel'
+        aria-hidden='true'
+      >
+        <div className='modal-dialog'>
+          <div className='modal-content modal-background'>
+            <div className='modal-header'>
+              <h3 className='modal-title ' id='orderDetailModalLabel'>
+                Order Details
+              </h3>
+
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div className='modal-body'>
+              <OrderDetailScreen
+                orderDetail={orderDetail && orderDetail}
+                addDecimal={addDecimal}
+                updateToPayHandler={updateToPayHandler}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

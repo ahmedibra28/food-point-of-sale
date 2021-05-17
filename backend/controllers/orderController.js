@@ -24,6 +24,20 @@ export const addOrderItems = asyncHandler(async (req, res) => {
   }
 })
 
+export const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await OrderModel.findById(req.params.id)
+  if (order) {
+    order.status = 'paid'
+
+    await order.save()
+    io.emit('addOrderItems', { success: true })
+    res.status(200).json({ message: 'payment is done successfully!' })
+  } else {
+    res.status(404)
+    throw new Error('Order not found')
+  }
+})
+
 export const getOrderById = asyncHandler(async (req, res) => {
   const order = await OrderModel.findById(req.params.id)
   if (order) {
