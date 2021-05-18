@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { FaSearch } from 'react-icons/fa'
+// import { FaSearch } from 'react-icons/fa'
 import CartScreen from './CartScreen'
 import CategoryScreen from './CategoryScreen'
 import ProductListScreen from './ProductListScreen'
@@ -98,7 +98,7 @@ const HomeScreen = () => {
         <div className='product-home p-3 mt-3'>
           <CategoryScreen category={category} setCategory={setCategory} />
 
-          <div className='input-group mb-3'>
+          {/* <div className='input-group mb-3'>
             <input
               type='text'
               className='form-control'
@@ -109,7 +109,7 @@ const HomeScreen = () => {
             <span className='input-group-text bg-primary ' id='basic-addon2'>
               <FaSearch className='text-light' />
             </span>
-          </div>
+          </div> */}
           {loadingListProducts ? (
             <Loader />
           ) : errorListProducts ? (

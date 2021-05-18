@@ -66,7 +66,7 @@ const App = () => {
 
                 <ul className='navbar-nav d-flex flex-row'>
                   <li className='nav-item'>
-                    <Link to='/' className='nav-link'>
+                    <Link to='/#cart' className='nav-link'>
                       <FaShoppingCart className='mb-1' />{' '}
                       <sup>{cartItems && qty}</sup>
                     </Link>

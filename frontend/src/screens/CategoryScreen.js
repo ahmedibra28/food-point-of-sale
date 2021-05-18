@@ -8,7 +8,7 @@ import snack from '../images/snack.png'
 const CategoryScreen = ({ setCategory, category }) => {
   return (
     <div className='row category'>
-      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
+      <div className='col-2 mx-auto'>
         <div
           className={`card ${
             category !== 'pizza' ? 'bg-transparent' : ''
@@ -34,7 +34,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         </div>
       </div>
 
-      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
+      <div className='col-2 mx-auto'>
         <div
           className={`card ${
             category !== 'snacks' ? 'bg-transparent' : ''
@@ -60,7 +60,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         </div>
       </div>
 
-      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
+      <div className='col-2 mx-auto'>
         <div
           className={`card ${
             category !== 'lunch' ? 'bg-transparent' : ''
@@ -86,7 +86,7 @@ const CategoryScreen = ({ setCategory, category }) => {
         </div>
       </div>
 
-      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
+      <div className='col-2 mx-auto'>
         <div
           className={`card ${
             category !== 'burger' ? 'bg-transparent' : ''
@@ -111,7 +111,7 @@ const CategoryScreen = ({ setCategory, category }) => {
           </div>
         </div>
       </div>
-      <div className='col-lg-2 col-md-3 col-4 mx-auto'>
+      <div className='col-2 mx-auto'>
         <div
           className={`card ${
             category !== 'drinks' ? 'bg-transparent' : ''

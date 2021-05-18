@@ -71,7 +71,7 @@ export const updateOrder = createAsyncThunk(
   async (id, { getState }) => {
     const config = configHeader(getState)
     try {
-      const { data } = await axios.put(`/api/orders/${id}`, config)
+      const { data } = await axios.put(`/api/orders/${id}`, {}, config)
       return data
     } catch (error) {
       throw error.response.data

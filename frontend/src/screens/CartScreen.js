@@ -66,7 +66,7 @@ const CartScreen = ({
   }
 
   return (
-    <div className='row cart'>
+    <div className='row cart' id='cart'>
       <div className='d-flex justify-content-between'>
         <h5 className='text-primary'>
           Order <span className='fw-light fs-6'>Summary</span>
