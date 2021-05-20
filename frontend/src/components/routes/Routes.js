@@ -14,6 +14,8 @@ import ForgotPasswordScreen from '../../screens/ForgotPasswordScreen'
 import ResetPasswordScreen from '../../screens/ResetPasswordScreen'
 import ProductScreen from '../../screens/ProductScreen'
 import OrderScreen from '../../screens/OrderScreen'
+import ReportScreen from '../../screens/ReportScreen'
+import DashboardScreen from '../../screens/DashboardScreen'
 
 const Routes = () => {
   return (
@@ -35,6 +37,16 @@ const Routes = () => {
           component={ProductScreen}
         />
         <PrivateRoute role={['Admin']} path='/orders' component={OrderScreen} />
+        <PrivateRoute
+          role={['Admin']}
+          path='/report'
+          component={ReportScreen}
+        />
+        <PrivateRoute
+          role={['Admin']}
+          path='/dashboard'
+          component={DashboardScreen}
+        />
         <Route
           path='/resetpassword/:resetToken'
           component={ResetPasswordScreen}

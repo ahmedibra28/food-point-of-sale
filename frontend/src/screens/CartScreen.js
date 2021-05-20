@@ -5,7 +5,7 @@ import moment from 'moment'
 import { useReactToPrint } from 'react-to-print'
 
 import {
-  FaDollarSign,
+  FaMoneyCheck,
   FaPrint,
   FaShoppingCart,
   FaTimesCircle,
@@ -193,7 +193,7 @@ const CartScreen = ({
                   <span className='spinner-border spinner-border-sm' />
                 ) : (
                   <>
-                    <FaDollarSign className='mb-1' /> Checkout{' '}
+                    <FaMoneyCheck className='mb-1' /> Order{' '}
                   </>
                 )}
               </button>

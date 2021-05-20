@@ -58,6 +58,12 @@ export const getOrders = asyncHandler(async (req, res) => {
 
   const pages = Math.ceil(total / pageSize)
 
+  if (req.query.page) {
+    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 })
+  } else {
+    query = query.sort({ createdAt: -1 })
+  }
+
   query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 })
 
   if (page > pages && total > 0) {
