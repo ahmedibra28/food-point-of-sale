@@ -63,11 +63,8 @@ const UserListScreen = () => {
   const { successDeleteUser, errorDeleteUser } = userDelete
 
   const userRegister = useSelector((state) => state.userRegister)
-  const {
-    loadingRegisterUser,
-    errorRegisterUser,
-    successRegisterUser,
-  } = userRegister
+  const { loadingRegisterUser, errorRegisterUser, successRegisterUser } =
+    userRegister
 
   const formCleanHandler = () => {
     setEdit(false)
@@ -396,7 +393,7 @@ const UserListScreen = () => {
                       </td>
                       <td className='btn-group'>
                         <button
-                          className='btn btn-primary btn-sm'
+                          className='btn btn-success me-1 btn-sm'
                           onClick={() => editHandler(user)}
                           data-bs-toggle='modal'
                           data-bs-target='#editUserModal'

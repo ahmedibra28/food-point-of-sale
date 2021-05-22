@@ -134,6 +134,7 @@ const OrderScreen = () => {
                   <th>DATE & TIME</th>
                   <th>ORDER TYPE</th>
                   <th>MOBILE</th>
+                  <th>TABLE NO.</th>
                   <th>TOTAL AMOUNT</th>
                   <th>STATUS</th>
                   <th></th>
@@ -146,6 +147,7 @@ const OrderScreen = () => {
                       <td>{moment(order.createdAt).format('lll')}</td>
                       <td>{order.orderType}</td>
                       <td>{order.mobile}</td>
+                      <td>{order.table}</td>
 
                       <td>${addDecimal(order.totalPrice)}</td>
                       <td>

@@ -4,9 +4,8 @@ import OrderModel from '../models/orderModel.js'
 export const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
-    order: { orderType, mobile, totalPrice },
+    order: { orderType, mobile, totalPrice, table },
   } = req.body
-
   if (orderItems && orderItems.length === 0) {
     res.status(400)
     throw new Error('No order items')
@@ -16,6 +15,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
       totalPrice,
       mobile,
       orderType,
+      table,
     })
 
     const createdOrder = await order.save()

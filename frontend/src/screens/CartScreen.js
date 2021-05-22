@@ -159,9 +159,9 @@ const CartScreen = ({
                 <span className='text-danger'>{errors.mobile.message}</span>
               )}
             </div>
-            <div className='mb-2'>
+            <div className='mb-2 d-flex'>
               <select
-                className='form-control'
+                className='form-control me-1'
                 {...register('orderType', {
                   required: 'Order type is required',
                 })}
@@ -172,6 +172,22 @@ const CartScreen = ({
               </select>
               {errors.orderType && (
                 <span className='text-danger'>{errors.orderType.message}</span>
+              )}
+              <select
+                className='form-control ms-1'
+                {...register('table', {
+                  required: 'required',
+                })}
+              >
+                <option value=''>Choose A Table</option>
+                {[...Array(10).keys()].map((x) => (
+                  <option key={x + 1} value={x + 1}>
+                    {x + 1}
+                  </option>
+                ))}
+              </select>{' '}
+              {errors.table && (
+                <span className='text-danger'>{errors.table.message}</span>
               )}
             </div>
 

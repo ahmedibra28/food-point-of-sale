@@ -379,7 +379,7 @@ const ProductScreen = () => {
                       </td>
                       <td className='btn-group'>
                         <button
-                          className='btn btn-primary btn-sm'
+                          className='btn btn-success btn-sm me-1'
                           onClick={() => editHandler(product)}
                           data-bs-toggle='modal'
                           data-bs-target='#editProductModal'

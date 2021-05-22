@@ -52,6 +52,7 @@ const HomeScreen = () => {
     if (successCreateOrder) {
       setTimeout(() => {
         dispatch(resetCreateOrder())
+        dispatch(removeAllFromCart())
       }, 5000)
     }
   }, [successCreateOrder, dispatch])
@@ -73,7 +74,12 @@ const HomeScreen = () => {
   const submitHandler = (data) => {
     dispatch(
       createOrder({
-        order: { orderType: data.orderType, mobile: data.mobile, totalPrice },
+        order: {
+          orderType: data.orderType,
+          mobile: data.mobile,
+          totalPrice,
+          table: data.table,
+        },
         orderItems: cartItems,
       })
     )

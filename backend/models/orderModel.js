@@ -15,6 +15,11 @@ const orderScheme = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    table: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
     status: {
       type: String,
       required: true,

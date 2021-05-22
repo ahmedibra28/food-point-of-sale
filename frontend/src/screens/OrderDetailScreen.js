@@ -42,6 +42,8 @@ const OrderDetailScreen = ({ orderDetail, addDecimal, updateToPayHandler }) => {
               <span className='fw-bold'>Date:</span>{' '}
               {moment(orderDetail.createdAt).format('lll')}
               <br />
+              <span className='fw-bold'>Table #:</span> {orderDetail.table}
+              <br />
             </p>
             <div className='table-responsive'>
               <table className='table'>
@@ -86,13 +88,15 @@ const OrderDetailScreen = ({ orderDetail, addDecimal, updateToPayHandler }) => {
       )}
 
       <div className='btn-group'>
-        <button
-          type='button'
-          onClick={() => updateToPayHandler(orderDetail && orderDetail._id)}
-          className='btn btn-success btn-sm mx-1 float-end d-block'
-        >
-          <FaCheckCircle className='mb-1' /> Confirm
-        </button>
+        {orderDetail.status === 'unpaid' && (
+          <button
+            type='button'
+            onClick={() => updateToPayHandler(orderDetail && orderDetail._id)}
+            className='btn btn-success btn-sm mx-1 float-end d-block'
+          >
+            <FaCheckCircle className='mb-1' /> Confirm
+          </button>
+        )}
         <button
           type='button'
           onClick={handlePrint}
